@@ -3,13 +3,13 @@ import math
 
 #main file of project
 ######################
-#Part number one - banner and inputs to ask user what type of list number,numbers with letters , num,letters, special characters 
+#Part number one for moneer - banner and inputs to ask user what type of list number,numbers with letters , num,letters, special characters 
 
 
 
 
 ##################################
-#part number 2 - function if it  is just numbers
+#part number 2 for yousef - function if it  is just numbers
 
 
 
@@ -19,7 +19,7 @@ import math
 
 
 ######################################
-#Part 3 -  function of numbers with letters
+#Part 3 for najeeb-  function of numbers with letters
 
 
 
@@ -28,7 +28,7 @@ import math
 
 
 ######################################
-#Part 4 - function of numbers with letters with special characters 
+#Part 4 (me)- function of numbers with letters with special characters 
 
 
 
@@ -37,7 +37,7 @@ import math
 
 
 ######################################
-#Part 5- function to save the output to file 
+#Part 5 for haroon- function to save the output to file 
 
 
 
@@ -48,7 +48,7 @@ import math
 
 
 ######################################
-#Part 6 - Create Random listwith letters numbers and special characters 
+#Part 6 (me)- Create Random listwith letters numbers and special characters 
 
 
 
@@ -61,14 +61,14 @@ import math
 
 
 #########################################
-#part 7 - feauter of pdf
+#part 7 (me)- feauter of pdf
 def mix():
     names = input("Enter names => ").split(",")
     years = input("Enter years => ").split(",")
 
     names = [n.strip().lower() for n in names if n.strip()]
     years = [y.strip() for y in years if y.strip()]
-    symbols = ["", "_", "@"]
+    symbols = [ "_", "", "@"]
     templates = [
         "{name}{year}",
         "{name}_{year}",
@@ -94,5 +94,5 @@ def mix():
 def main():
     print("main function...")
 
-    
+
 main()
