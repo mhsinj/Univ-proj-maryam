@@ -1,6 +1,6 @@
 import itertools
 import math
-
+#test for commit
 #main file of project
 ######################
 #Part number one for moneer - banner and inputs to ask user what type of list number,numbers with letters , num,letters, special characters 
@@ -48,7 +48,7 @@ import math
 
 
 ######################################
-#Part 6 (me)- Create Random listwith letters numbers and special characters 
+#Part 6 (me)- Create Random listwith letters numbers and special characters #
 
 
 
