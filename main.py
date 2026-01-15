@@ -20,11 +20,63 @@ import math
 
 ######################################
 #Part 3 for najeeb-  function of numbers with letters
+def letters_with_numbers():  
+    # تعريف دالة وظيفتها توليد كلمات من حروف و ارقام
 
+    names = input("Enter names (comma separated): ").split(",")
+    # يطلب من المستخدم إدخال أسماء مفصولة بفاصلة
+    # عشان نقدر نتعامل مع كل مدخل على حدىsplit(",") يحول الإدخال من نص إلى قائمة أسماء
 
+    numbers = input("Enter numbers/years (comma separated): ").split(",")
+    # يطلب من المستخدم إدخال أرقام أو سنوات مفصولة بفاصلة
+    # ويتم تحويلها إلى قائمة
 
+    names = [n.strip() for n in names if n.strip()]
+    # يمر على كل اسم في القائمة
+    # strip() يحذف المسافات الزائدة
+    # if n.strip() يتجاهل القيم الفارغة
 
+    numbers = [num.strip() for num in numbers if num.strip()]
+    # يمر على كل اسم في القائمة
+    # strip() يحذف المسافات الزائدة
+    # if num.strip() يتجاهل القيم الفارغة
 
+    result = []
+    # إنشاء قائمة فارغة لتخزين جميع النتائج
+
+    for name in names:
+        # حلقة تمر على كل اسم في قائمة الأسماء
+
+        for num in numbers:
+            # حلقة داخلية تمر على كل رقم
+            # يتم دمج كل اسم مع كل رقم
+
+            result.append(name + num)
+            # إضافة الاسم مع الرقم (مثال: Ahmed2001)
+
+            result.append(name.lower() + num)
+            # إضافة الاسم بحروف صغيرة مع الرقم (ahmed2001)
+
+            result.append(name.capitalize() + num)
+            # إضافة الاسم مع أول حرف كبير (Ahmed2001)
+
+            result.append(num + name)
+            # إضافة الرقم ثم الاسم (2001Ahmed)
+
+            result.append(num + name.lower())
+            # إضافة الرقم ثم الاسم بحروف صغيرة (2001ahmed)
+
+    print("\nGenerated combinations:")
+    # طباعة عنوان قبل عرض النتائج
+
+    for r in result:
+        # حلقة تمر على كل كلمة تم توليدها
+
+        print(r)
+        # طباعة كل كلمة
+
+    return result
+    # إرجاع القائمة لاستخدامها في أجزاء أخرى من المشروع
 
 
 ######################################
