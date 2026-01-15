@@ -21,62 +21,68 @@ import math
 ######################################
 #Part 3 for najeeb-  function of numbers with letters
 def letters_with_numbers():  
-    # تعريف دالة وظيفتها توليد كلمات من حروف و ارقام
+   
+    try:
+        # إدخال أسماء المستخدم مفصولة بفواصل وتحويلها لقائمة
+        names_input = input("Enter names (comma separated): ").split(",")  
 
-    names = input("Enter names (comma separated): ").split(",")
-    # يطلب من المستخدم إدخال أسماء مفصولة بفاصلة
-    # عشان نقدر نتعامل مع كل مدخل على حدىsplit(",") يحول الإدخال من نص إلى قائمة أسماء
+        # إدخال أرقام المستخدم مفصولة بفواصل وتحويلها لقائمة
+        numbers_input = input("Enter numbers (comma separated): ").split(",")  
 
-    numbers = input("Enter numbers/years (comma separated): ").split(",")
-    # يطلب من المستخدم إدخال أرقام أو سنوات مفصولة بفاصلة
-    # ويتم تحويلها إلى قائمة
+        # تنظيف أسماء المستخدم: إزالة المسافات الزائدة والتحقق أن كل اسم يحتوي على حروف فقط
+        names = [n.strip() for n in names_input if n.strip().isalpha()]  
 
-    names = [n.strip() for n in names if n.strip()]
-    # يمر على كل اسم في القائمة
-    # strip() يحذف المسافات الزائدة
-    # if n.strip() يتجاهل القيم الفارغة
+        # تنظيف أرقام المستخدم: إزالة المسافات الزائدة والتحقق أن كل رقم يحتوي على أرقام فقط
+        numbers = [num.strip() for num in numbers_input if num.strip().isdigit()]  
 
-    numbers = [num.strip() for num in numbers if num.strip()]
-    # يمر على كل اسم في القائمة
-    # strip() يحذف المسافات الزائدة
-    # if num.strip() يتجاهل القيم الفارغة
+        # التحقق من أن هناك أسماء وأرقام صالحة
+        if not names or not numbers:  
+            raise Exception("you entered wrong input")  # إذا أي قائمة فارغة → رسالة خطأ
 
-    result = []
-    # إنشاء قائمة فارغة لتخزين جميع النتائج
+        # دالة للتحقق من أن النص أو الرقم ليس ضعيفًا
+        # تعتبر ضعيفة إذا كل الحروف أو الأرقام مكررة (مثال: aaaaa أو 11111)
+        def is_weak(word):
+            return all(c == word[0] for c in word)  # True إذا كل الحروف/الأرقام نفسها
 
-    for name in names:
-        # حلقة تمر على كل اسم في قائمة الأسماء
+        wordlist = set()  # استخدام set لتخزين النتائج وإزالة أي تكرار تلقائي
 
-        for num in numbers:
-            # حلقة داخلية تمر على كل رقم
-            # يتم دمج كل اسم مع كل رقم
+        # دمج كل اسم مع كل رقم
+        for name in names:  
+            if is_weak(name):  # إذا الاسم ضعيف جدًا
+                print(f'The name "{name}" is too weak')  # رسالة للمستخدم
+                continue  # تجاهل الاسم الضعيف والانتقال للاسم التالي
 
-            result.append(name + num)
-            # إضافة الاسم مع الرقم (مثال: Ahmed2001)
+            for num in numbers:  
+                if is_weak(num):  # إذا الرقم ضعيف جدًا
+                    print(f'The number "{num}" is too weak')  # رسالة للمستخدم
+                    continue  # تجاهل الرقم الضعيف
 
-            result.append(name.lower() + num)
-            # إضافة الاسم بحروف صغيرة مع الرقم (ahmed2001)
+                # إنشاء جميع التركيبات الممكنة بين الاسم والرقم
+                variants = [
+                    name + num,           # الاسم أولاً ثم الرقم
+                    name.lower() + num,   # الاسم بحروف صغيرة + الرقم
+                    name.capitalize() + num, # أول حرف كبير + الرقم
+                    num + name,           # الرقم أولاً ثم الاسم
+                    num + name.lower()    # الرقم + الاسم بحروف صغيرة
+                ]
 
-            result.append(name.capitalize() + num)
-            # إضافة الاسم مع أول حرف كبير (Ahmed2001)
+                # إضافة كل كلمة إلى set → أي تكرار يُلغى تلقائيًا
+                for w in variants:
+                    wordlist.add(w)
 
-            result.append(num + name)
-            # إضافة الرقم ثم الاسم (2001Ahmed)
+        # طباعة عدد الكلمات الناتجة
+        print(f"\nGenerated {len(wordlist)} unique words:")  
 
-            result.append(num + name.lower())
-            # إضافة الرقم ثم الاسم بحروف صغيرة (2001ahmed)
+        # طباعة كل كلمة في سطر مستقل (مرتبة)
+        for r in sorted(wordlist):
+            print(r)  
 
-    print("\nGenerated combinations:")
-    # طباعة عنوان قبل عرض النتائج
+        # إعادة القائمة لاستخدامها في أجزاء أخرى من المشروع
+        return wordlist  
 
-    for r in result:
-        # حلقة تمر على كل كلمة تم توليدها
-
-        print(r)
-        # طباعة كل كلمة
-
-    return result
-    # إرجاع القائمة لاستخدامها في أجزاء أخرى من المشروع
+    except Exception:  
+        # إذا كان الإدخال فارغ أو غير صالح، تظهر هذه الرسالة
+        print("you entered wrong input")  
 
 
 ######################################
